@@ -578,8 +578,8 @@ Some essential results are given in advance so that the adaptive control design 
 The adaptive control inputs for stabilizing the attitude dynamics in Eq.~(\ref{eq:2model}) are given directly:
 \begin{align}
 \begin{split}
-u_1 = -\frac{\bar\delta\bar\rho\eta_1(t)sgn(\bar S)+k_1\bar S}{\bar\alpha b_1(X,t) + \bar\beta b_3(X,t) + \bar\iota b_5(X,t)}\\
-u_2 = -\frac{\bar\delta\bar\rho\eta_2(t)sgn(\bar S)+k_2\bar S}{\bar\alpha b_2(X,t) + \bar\beta b_4(X,t) + \bar\iota b_6(X,t)}.
+u_1 &= -\frac{\bar\delta\bar\rho\eta_1(t)sgn(\bar S)+k_1\bar S}{\bar\alpha b_1(X,t) + \bar\beta b_3(X,t) + \bar\iota b_5(X,t)}\\
+u_2 &= -\frac{\bar\delta\bar\rho\eta_2(t)sgn(\bar S)+k_2\bar S}{\bar\alpha b_2(X,t) + \bar\beta b_4(X,t) + \bar\iota b_6(X,t)}.
 \end{split}\label{eq:u1u2}
 \end{align}\par
 In preceding equation
@@ -614,6 +614,16 @@ Referring to Eq.~(\ref{eq:vdotv}), above expression can be derived to
 \end{align}\par
 According to the description of Barbalat's lemmas and referring to Eq.~(\ref{eq:V10}), $t\to\infty$ implies $S(t)\to 0$. Hence the second-level sliding surface in Eq.~(\ref{eq:bar S}) is stable, and proof is demonstrated completely.
 \end{proof}
+\begin{remark}
+In addition, if the inputs are selected as:
+\begin{align}
+\begin{split}
+u_1 &= -\frac{\bar\delta\bar\rho\eta_1(t)sgn(\bar S)+k_1\bar S_1}{\bar\alpha b_1(X,t) + \bar\beta b_3(X,t) + \bar\iota b_5(X,t)}\\
+u_2 &= -\frac{\bar\delta\bar\rho\eta_2(t)sgn(\bar S)+k_2\bar S_2}{\bar\alpha b_2(X,t) + \bar\beta b_4(X,t) + \bar\iota b_6(X,t)}.
+\end{split}\label{eq:modified_u1u2}
+\end{align}
+where $k_1\bar S_1+k_2\bar S_2=k_0\bar S$ with $k_0>0$, one can also obtain the result above.
+\end{remark}
 \begin{remark}
 Theorem~\ref{theorem:3} is proposed for guaranteeing that the sliding mode dynamics will reach the ideal surface $\bar S$ asymptotically, and the adaptive update ${\bar\eta}(t)$ eliminate the effect of the input saturation in the two-satellite system. Moreover, considering the convergence of the first-level sliding mode dynamics, and according to the article~\cite{wang2004design}, they are asymptotically stable, and the proof is omitted here.
 \end{remark}
