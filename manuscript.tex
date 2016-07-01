@@ -48,6 +48,7 @@ grestore
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{color}
+
 \spnewtheorem{assumption}{Assumption}{\bf}{\it}
 %
 % \usepackage{mathptmx}      % use Times fonts if available on your TeX system
@@ -64,7 +65,7 @@ grestore
 %
 \begin{document}
 
-\title{Adaptive Hierarchial Sliding Mode Control with Input Saturation for Attitude Regulation of Multi-satellite Tethered System%\thanks{Grants or other notes
+\title{Adaptive Hierarchical Sliding Mode Control with Input Saturation for Attitude Regulation of Multi-satellite Tethered System%\thanks{Grants or other notes
 %about the article that should go on the front page should be
 %placed here. General acknowledgments should be placed at the end of the article.}
 }
@@ -96,7 +97,7 @@ grestore
 \maketitle
 
 \begin{abstract}
-This paper proposes  a  novel adaptive hierarchical  sliding mode control for the attitude regulation of the multi-satellite inline tethered system, where the input saturation is taken into account. The governing equations for the attitude dynamics of the three-satellite inline tethered system are derived firstly by utilizing Lagrangian mechanics theory. Considering the fact that the attitude of the central satellite can be adjusted by using the simple exponential stabilization scheme, the decoupling of the central satellite and the terminal ones is presented, and in addition, the new adaptive sliding mode control law is applied to stabilize the attitude dynamics of the two terminal satellites based on the synchronization and partial contraction theory. In the adaptive hierarchial sliding mode control design, the input is modeled as saturated input due to the fact that the flywheel torque is bounded, and meanwhile, an adaptive update rate is introduced to eliminate the effect of the saturated input and the external perturbation. The proposed control scheme can be applied on the two-satellite system to achieve fixed-point rotation. Numerical results validate the effectiveness of the proposed method.
+This paper proposes  a  novel adaptive hierarchical  sliding mode control for the attitude regulation of the multi-satellite inline tethered system, where the input saturation is taken into account. The governing equations for the attitude dynamics of the three-satellite inline tethered system are derived firstly by utilizing Lagrangian mechanics theory. Considering the fact that the attitude of the central satellite can be adjusted by using the simple exponential stabilization scheme, the decoupling of the central satellite and the terminal ones is presented, and in addition, the new adaptive sliding mode control law is applied to stabilize the attitude dynamics of the two terminal satellites based on the synchronization and partial contraction theory. In the adaptive hierarchical sliding mode control design, the input is modeled as saturated input due to the fact that the flywheel torque is bounded, and meanwhile, an adaptive update rate is introduced to eliminate the effect of the saturated input and the external perturbation. The proposed control scheme can be applied on the two-satellite system to achieve fixed-point rotation. Numerical results validate the effectiveness of the proposed method.
 \keywords{Multi-satellite tethered system \and Adaptive Sliding mode \and Input saturation \and Satellite attitude adjusting \and Underactuated system stabilization}
 % \PACS{PACS code1 \and PACS code2 \and more}
 % \subclass{MSC code1 \and MSC code2 \and more}
@@ -149,9 +150,17 @@ where $J_1$ denotes the moment of inertia of the satellite array for the vertica
 \begin{align}
 J_1\dot{\omega}_1-(J_1-J_3)\omega_3\omega_2=\tau_1\\
 J_2\dot{\omega}_2-(J_2-J_3)\omega_3\omega_1=\tau_2\\
-J_3\dot{\omega}_3=\tau_3
+J_3\dot{\omega}_3=\tau_3\label{eq:3model}
 \end{align}
-which brings out that the three-satellite inline tethered system torsional rotation dynamics is irrelevant to the other two axes~\cite{chung2008propellant1}. The in-plane behavior will be decoupled from the out-of-plane one implicitly with utilizing a control law to regulate both $\omega_3$ and $\dot{\omega}_3$ to nought perpetually. On the premise of the assumption that the out-of-plane plant is stable independently, the in-plane attitude dynamics, accordingly, can be described as a model consisting of three flywheels assembly and two tethers, as seen in Figure~\ref{Figure:model3body}. The mathematical model expressed by using Euler¨CLagrange equations is established, and the origin of the array is the satellite's geometrical center as well the mass center. In the 2D plane, the three-body satellite array arranges along the $y$ direction, and the positive directions of $\theta_i$ and $\phi_i$ are anticlockwise. $F_i$ denotes the $i$th thruster's linear force, and $u_i$ is defined to be the $i$th flywheel torque acting on the center of mass. $\Psi$ identifies the rotation angle, then the dynamic equation follows~\cite{chung2007nonlinear1}
+\begin{color}{red}
+which brings out that the three-satellite inline tethered system torsional rotation dynamics is irrelevant to the other two axes~\cite{chung2008propellant1}. Since the dynamic state $\omega_3$ is independent from the two axes, a simple linear feedback control can regulate the flywheel torque to control the dynamics of the third axis, such that both $\omega_3=0$ and $\dot\omega_3 = 0$. Hence Eq.~(\ref{eq:3model}) reduces to
+\end{color}
+\begin{align}
+\begin{split}
+J_1\dot\omega_1&=\tau_1\\
+J_2\dot\omega_2&=\tau_2.
+\end{split}
+\end{align} \begin{color}{red}From equations above, $\omega_2$ is independent from $\omega_1$. Similar to the dynamic state $\omega_3$, dynamic state $\omega_2$ can be controlled separately without affecting the in-plane dynamics~\cite{chung2007nonlinear,chung2007nonlinear1,chung2007nonlinear3}. For each satellite, three flywheels are mounted orthogonally to regulate the attitude. The flywheel which is mounted perpendicularly to the tether, governs the dynamic state $\omega_3$, and different from the other axes, the varying $\omega_3$ will not lead to the situation described in Figure~\ref{Figure:model3body}, hence a simple linear feedback control can achieve its attitude regulation. When we attention on the in-plane dynamics, the other two flywheel torques and thruster firing handle the out-plane dynamics, which can guarantee that the in-plane motion occurs without other disturbance from the other axes.\end{color} On the premise of the assumption that the out-of-plane plant is stable independently, the in-plane attitude dynamics, accordingly, can be described as a model consisting of three flywheels assembly and two tethers, as seen in Figure~\ref{Figure:model3body}. The mathematical model expressed by using Euler¨CLagrange equations is established, and the origin of the array is the satellite's geometrical center as well the mass center. In the 2D plane, the three-body satellite array arranges along the $y$ direction, and the positive directions of $\theta_i$ and $\phi_i$ are anticlockwise. $F_i$ denotes the $i$th thruster's linear force, and $u_i$ is defined to be the $i$th flywheel torque acting on the center of mass. $\Psi$ identifies the rotation angle, then the dynamic equation follows~\cite{chung2007nonlinear1}
 \begin{align}
     &\begin{bmatrix}
         M_{11}      &{M_2^T(\theta_1,\phi_1)}      &M_2^T(\theta_2,\phi_2)\\
@@ -305,18 +314,13 @@ M_1(\phi)
 \dot{\theta}\\
 \dot{\phi}
 \end{pmatrix}
-+
-\begin{bmatrix}
-2m(r\cos{\phi}+l)\dot{\theta}\dot{l}\\
-2mr\cos{\phi}\dot{\theta}\dot{l}
-\end{bmatrix}
 =
 \begin{bmatrix}
 1\\
 1
 \end{bmatrix}\bar{sat}(u)\label{eq:individualsys}
 \end{align}
-where $\bar{sat}()$ means the saturation characteristics. According to the zero tether length rate assumption $\dot l=0$, the preceding equations coincides with Eq.~(\ref{eq:3bodyreduce}). Attend to the problem of the reduced three-satellite inline tethered formation, and the following lemma is proposed to demonstrate the stability of the coupled attitude dynamics shown in Eq.~(\ref{eq:3bodymodel}).
+where $\bar{sat}()$ means the saturation characteristics. Attend to the problem of the reduced three-satellite inline tethered formation, and the following lemma is proposed to demonstrate the stability of the coupled attitude dynamics shown in Eq.~(\ref{eq:3bodymodel}).
 \begin{lemma}
 Synchronization and Partial Contraction~\cite{wang2005partial}. Consider two nominal coupled system which have the relation
 \begin{align}
@@ -346,8 +350,8 @@ b_2(X,t) =&\frac{mrl\cos x_3+ml^2}{I_rml^2-m^2r^2l^2\cos{^2x_3}}
 \end{align*}\par
 In addition, $d_1(X,t)$ and $d_2(X,t)$ denote the external perturbations such as the gravity gradient torque, the solar pressure torque, the aerodynamic torque or the magnetic torque, and among the previous perturbations, the aerodynamic torque plays a major role, which will affect the stability of the attitude.\par
 In this work, the attitude regulation of the individual satellite expressed in Eq.~(\ref{eq:model}), which can be described as an issue about the stabilization of an underactuated and coupling input system, is achieved by utilizing the variable structure theory, with emphasis on the solution of the actuators saturation. Once the states of Eq.~(\ref{eq:model}) is stable, according to Lemma~\ref{theorem:syn}, the entire three-satellite array can be adjusted to be a fixed-point rotation system.
-\subsection{Modified Hierarchial Sliding Mode Control with Input Saturation}\label{sec:SMC}
-The issue about attitude regulation of the three-satellite inline tethered system is converted into designing the independent control system for the individual satellite described as Eq.~(\ref{eq:model}), and meanwhile, the system is strict saturated, coupled and nonlinear. There exists a stable hierarchial sliding mode approach (HSM) investigated for a class of second order underactuated systems, like Acrobot, overhead crane and pendubot etc~\cite{wang2004design}, and the state space equations of the these models are similar to the form of Eq.~(\ref{eq:model}). Considering the effect of the input saturation, synthesizing the HSM and adaptive sliding mode control schemes derives a modified method, which can overcome both the input saturation and coupling characteristics.\par
+\section{Modified Hierarchical Sliding Mode Control with Input Saturation}\label{sec:SMC}
+The issue about attitude regulation of the three-satellite inline tethered system is converted into designing the independent control system for the individual satellite described as Eq.~(\ref{eq:model}), and meanwhile, the system is strict saturated, coupled and nonlinear. There exists a stable hierarchical sliding mode approach (HSM) investigated for a class of second order underactuated systems, like Acrobot, overhead crane and pendubot etc~\cite{wang2004design}, and the state space equations of the these models are similar to the form of Eq.~(\ref{eq:model}). Considering the effect of the input saturation, synthesizing the HSM and adaptive sliding mode control schemes derives a modified method, which can overcome both the input saturation and coupling characteristics.\par
 In the symbol system of the control system, the time variable is usually abbreviated if it won't lead to confusing, i.e., $S(t)$ may be simplified as $S$. HSM structures the first-level sliding surfaces as follows:
 \begin{align}
 \begin{split}
@@ -386,6 +390,9 @@ Modified hierarchical sliding mode control (MHSM) constructs the first- and seco
 \begin{align}
 u = -\frac{\rho\delta\eta(t)}{\alpha b_1(X,t)+\beta b_2(X,t)}sgn(S)\label{eq:u}.
 \end{align}\par
+\begin{color}{red}
+$\eta(t)$ is designed as the system gain with the adaptive update rate, and the stability of the system~(\ref{eq:model}) can be guaranteed with its help even if the input saturation occurs during the attitude regulation.
+\end{color}
 In the preceding expression
 \begin{align}
 \rho &= 2(\alpha+\beta)max(\zeta,\vert c_1x_2+f_1(X,t)\vert,\vert c_2x_4+f_2(X,t)\vert)
@@ -436,7 +443,7 @@ V(0) &\ge V(t) + \int_{0}^{t}(\delta-1)\rho\vert S(\tau)\vert d\tau\\
 \end{align}\par
 According to the description of Barbalat's lemmas, $t\to\infty$ implies $S(t)\to 0$. Hence, proof is demonstrated completely.
 \end{proof}
-\section{Adaptive Sliding Control For Two-satellite Array System}\label{sec:SMC2}
+\section{Adaptive Sliding Mode Control For Two-satellite Array System}\label{sec:SMC2}
 The three-satellite inline array can be simplified as three individual satellite systems by above-mentioned model reduction technology, and in this section, a two-satellite array system shown in Figure~\ref{Figure:model2body} is investigated, in which two satellites are the participants connected with a stiff space tether. The dynamic equations of the two-satellite array system can be described as follows:
 %figure4
 \begin{figure}
@@ -700,11 +707,12 @@ This paper proposes a torque control scheme to adjust the attitude of the multi-
 %and remove the percent signs.
 This work is partially supported by the National Natural Science Foundation of China (No. 61104112, 61503097).
 \end{acknowledgements}
-
+\begin{color}{red}
 % BibTeX users please use one of
 %\bibliographystyle{spbasic}      % basic style, author-year citations
-%\bibliographystyle{spmpsci}      % mathematics and physical sciences
-\bibliographystyle{spphys}       % APS-like style for physics
+\bibliographystyle{spmpsci1}      % mathematics and physical sciences
+%\bibliographystyle{spmpsci2}   
+%\bibliographystyle{spphys}       % APS-like style for physics
 %\bibliography{}   % name your BibTeX data base
 
 % Non-BibTeX users please use
@@ -712,7 +720,7 @@ This work is partially supported by the National Natural Science Foundation of C
 %\bibliographystyle{spbasic}
 %\bibliographystyle{spmpsci}
 \bibliography{ref_light}
-
+\end{color}
 %
 % and use \bibitem to create references. Consult the Instructions
 % for authors for reference list style.
