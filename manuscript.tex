@@ -97,7 +97,7 @@ grestore
 \maketitle
 
 \begin{abstract}
-This paper proposes  a  novel adaptive hierarchical  sliding mode control for the attitude regulation of the multi-satellite inline tethered system, where the input saturation is taken into account. The governing equations for the attitude dynamics of the three-satellite inline tethered system are derived firstly by utilizing Lagrangian mechanics theory. Considering the fact that the attitude of the central satellite can be adjusted by using the simple exponential stabilization scheme, the decoupling of the central satellite and the terminal ones is presented, and in addition, the new adaptive sliding mode control law is applied to stabilize the attitude dynamics of the two terminal satellites based on the synchronization and partial contraction theory. In the adaptive hierarchical sliding mode control design, the input is modeled as saturated input due to the fact that the flywheel torque is bounded, and meanwhile, an adaptive update rate is introduced to eliminate the effect of the saturated input and the external perturbation. The proposed control scheme can be applied on the two-satellite system to achieve fixed-point rotation. Numerical results validate the effectiveness of the proposed method.
+This paper proposes  a  novel adaptive \begin{color}{red}hierarchical\end{color}  sliding mode control for the attitude regulation of the multi-satellite inline tethered system, where the input saturation is taken into account. The governing equations for the attitude dynamics of the three-satellite inline tethered system are derived firstly by utilizing Lagrangian mechanics theory. Considering the fact that the attitude of the central satellite can be adjusted by using the simple exponential stabilization scheme, the decoupling of the central satellite and the terminal ones is presented, and in addition, the new adaptive sliding mode control law is applied to stabilize the attitude dynamics of the two terminal satellites based on the synchronization and partial contraction theory. In the adaptive hierarchical sliding mode control design, the input is modeled as saturated input due to the fact that the flywheel torque is bounded, and meanwhile, an adaptive update rate is introduced to eliminate the effect of the saturated input and the external perturbation. The proposed control scheme can be applied on the two-satellite system to achieve fixed-point rotation. Numerical results validate the effectiveness of the proposed method.
 \keywords{Multi-satellite tethered system \and Adaptive Sliding mode \and Input saturation \and Satellite attitude adjusting \and Underactuated system stabilization}
 % \PACS{PACS code1 \and PACS code2 \and more}
 % \subclass{MSC code1 \and MSC code2 \and more}
@@ -357,7 +357,7 @@ b_2(X,t) =&\frac{mrl\cos x_3+ml^2}{I_rml^2-m^2r^2l^2\cos{^2x_3}}
 In addition, $d_1(X,t)$ and $d_2(X,t)$ denote the external perturbations such as the gravity gradient torque, the solar pressure torque, the aerodynamic torque or the magnetic torque, and among the previous perturbations, the aerodynamic torque plays a major role, which will affect the stability of the attitude.\par
 In this work, the attitude regulation of the individual satellite expressed in Eq.~(\ref{eq:model}), which can be described as an issue about the stabilization of an underactuated and coupling input system, is achieved by utilizing the variable structure theory, with emphasis on the solution of the actuators saturation. Once the states of Eq.~(\ref{eq:model}) is stable, according to Lemma~\ref{theorem:syn}, the entire three-satellite array can be adjusted to be a fixed-point rotation system.
 \section{Modified Hierarchical Sliding Mode Control with Input Saturation}\label{sec:SMC}
-The issue about attitude regulation of the three-satellite inline tethered system is converted into designing the independent control system for the individual satellite described as Eq.~(\ref{eq:model}), and meanwhile, the system is strict saturated, coupled and nonlinear. There exists a stable hierarchical sliding mode approach (HSM) investigated for a class of second order underactuated systems, like Acrobot, overhead crane and pendubot etc~\cite{wang2004design}, and the state space equations of the these models are similar to the form of Eq.~(\ref{eq:model}). Considering the effect of the input saturation, synthesizing the HSM and adaptive sliding mode control schemes derives a modified method, which can overcome both the input saturation and coupling characteristics.\par
+The issue about attitude regulation of the three-satellite inline tethered system is converted into designing the independent control system for the individual satellite described as Eq.~(\ref{eq:model}), and meanwhile, the system is strict saturated, coupled and nonlinear. There exists a stable \begin{color}{red}hierarchical sliding mode (HSM)\end{color} approach investigated for a class of second order underactuated systems, like Acrobot, overhead crane and pendubot etc~\cite{wang2004design}, and the state space equations of the these models are similar to the form of Eq.~(\ref{eq:model}). Considering the effect of the input saturation, synthesizing the HSM and adaptive sliding mode control schemes derives a modified method, which can overcome both the input saturation and coupling characteristics.\par
 In the symbol system of the control system, the time variable is usually abbreviated if it won't lead to confusing, i.e., $S(t)$ may be simplified as $S$. HSM structures the first-level sliding surfaces as follows:
 \begin{align}
 \begin{split}
@@ -404,19 +404,15 @@ In the preceding expression
 \rho &= 2(\alpha+\beta)max(\zeta,\vert c_1x_2+f_1(X,t)\vert,\vert c_2x_4+f_2(X,t)\vert)
 \end{align}
 and $\delta>1$. The derivative of $\eta(t)$ has the characteristics $$\dot{{\eta}}(t) = \rho\gamma\delta e^{-2\gamma^{-1}{\eta}^{-1}(t)}\vert S\vert$$ and $\eta(0) > 0$ so that the $\eta(t)$ is constant positive. $\gamma$ is a parameter for cancelling the input saturation, and it will be discussed later on. \begin{color}{red}
-For voiding the singularity of the input~(\ref{eq:u}), the selection of $\alpha$ and $\beta$ may satisfy the condition: $\alpha=\beta>0$. One can check that $\alpha b_1(X,t)+\beta b_2(X,t)$ is positive to get non-singular the input,
+For voiding the singularity of the input~(\ref{eq:u}), the selection of $\alpha$ and $\beta$ may satisfy the condition: $0<\alpha\le\beta$.
+    Selecting $\alpha$ and $\beta$ with $0<\alpha\le\beta$ yields
     \begin{align*}
-    \alpha b_1(X,t)+\beta b_2(X,t) &= \alpha(b_1(X,t)+b_2(X,t))\\
-    &=\frac{\alpha(-mrl\cos x_3+mrl\cos x_3+ml^2)}{I_rml^2-m^2r^2l^2\cos{^2x_3}}\\
-    &=\frac{\alpha ml^2}{I_rml^2-m^2r^2l^2\cos{^2x_3}}>0.
+    &\alpha b_1(X,t)+\beta b_2(X,t)\\
+    =& \alpha(b_1(X,t)+b_2(X,t))+(\beta-\alpha)b_2(X,t)\\
+    =&\frac{(\beta-\alpha)mrl\cos x_3 + \beta ml^2}{I_rml^2-m^2r^2l^2\cos{^2x_3}}>0.
     \end{align*}
-    Moreover, according to the derivation above, selecting $\alpha$ and $\beta$ with $\beta>\alpha>0$ yields 
-    \begin{align*}
-    \alpha b_1(X,t)+\beta b_2(X,t) &= \alpha(b_1(X,t)+b_2(X,t))+(\beta-\alpha)b_2(X,t)\\
-    &=\frac{(\beta-\alpha)mrl\cos x_3 + \beta ml^2}{I_rml^2-m^2r^2l^2\cos{^2x_3}}>0.
-    \end{align*}
-    This can also guarantee the non-singularity of Eq.~(\ref{eq:u}), because $x_3$ should be varying in a small region with $\vert x_3\vert<\pi/2$.
-\end{color} 
+    This can guarantee the non-singularity of Eq.~(\ref{eq:u}), because $x_3$ should be varying in a small region with $\vert x_3\vert<\pi/2$.
+\end{color}
 \begin{theorem}
 The nonlinear system which can be expressed as Eq.~(\ref{eq:model}), satisfies the Assumption~\ref{as:1} and~\ref{as:2}, and if the candidate of system input is Eq.~(\ref{eq:u}), the trajectories of the system asymptotically converge to the sliding surface $S = 0$.
 \end{theorem}
@@ -574,9 +570,9 @@ I_r^2 &-I_r(I_r+mrl\cos\phi_1) &-I_r(I_r+mrl\cos\phi_2)\\
 \end{footnotesize}\par
 \begin{color}{red}Consider the denominator of $M_3^{-1}(x_3,x_5)$:
 \begin{align*}
-I_rml^2(2I_r-mr^2\cos{^2\phi_1}-mr^2\cos{^2\phi_2})
-&= I_rml^2(2I_g+2mr^2-mr^2\cos{^2\phi_1}-mr^2\cos{^2\phi_2})\\
-&= I_rml^2[2I_g+mr^2(1-\cos{^2\phi_1})+mr^2(1-\cos{^2\phi_2})]>0
+&I_rml^2(2I_r-mr^2\cos{^2\phi_1}-mr^2\cos{^2\phi_2})\\
+=& I_rml^2(2I_g+2mr^2-mr^2\cos{^2\phi_1}-mr^2\cos{^2\phi_2})\\
+=& I_rml^2[2I_g+mr^2(1-\cos{^2\phi_1})+mr^2(1-\cos{^2\phi_2})]>0
 \end{align*}
 where $\vert\phi_1\vert<\pi/2$, $\vert\phi_2\vert<\pi/2$. Hence $M_{3}$ is invertible.\end{color}\par
 For proceeding to apply the MHSM control to the attitude regulation of the two-satellite inline system shown in Eq.~(\ref{eq:2model}), the first-level iedal sliding surfaces are selected firstly as follows:
@@ -609,14 +605,15 @@ u_2 &= -\frac{\bar\delta\bar\rho\eta_2(t)sgn(\bar S)+k_2\bar S}{\bar\alpha b_2(X
 \end{split}\label{eq:u1u2}
 \end{align}\par
 \begin{color}{red}
-For voiding the singularity of the inputs, the parameter $\bar\alpha$, $\bar\beta$ and $\bar\iota$ should satisfy the the condition $\bar\alpha=\bar\beta=\bar\iota>0$. Consider the denominator of the input $u_1$:
+For voiding the singularity of the input, the parameter $\bar\alpha$, $\bar\beta$ and $\bar\iota$ should satisfy the the condition $0<\bar\alpha\le\bar\iota$ and $0<\bar\alpha\le\bar\beta$.\par
+    Consider the expression $\bar\alpha b_1(X,t) + \bar\beta b_3(X,t)$ with $0<\bar\alpha\le \bar\beta$
     \begin{align*}
-    &\bar\alpha b_1(X,t) + \bar\beta b_3(X,t) + \bar\iota b_5(X,t)\\
-    =&\bar\alpha(b_1(X,t) + b_3(X,t) + b_5(X,t))\\
-    =&\bar\alpha(2ml^2I_r-m^2r^2l^2\cos^2\phi_2+I_rmrl\cos\phi_1+m^2r^2l^2\cos\phi_2\cos\phi_1)\\
-    =&\bar\alpha(ml^I_r+ml^2I_g+m^2r^2l^2(1-\cos^2\phi_2)+I_rmrl\cos\phi_1+m^2r^2l^2\cos\phi_2\cos\phi_1)
+    &\bar\alpha b_1(X,t) + \bar\beta b_3(X,t)\\
+    =&-\bar\alpha I_rmrl\cos\phi_1 + \bar\beta I_rmrl\cos\phi_1+\bar\beta[ml^I_r+ml^2I_g+m^2r^2l^2(1-\cos^2\phi_2)]\\
+    =&(\bar\beta-\bar\alpha) I_rmrl\cos\phi_1+\bar\beta[ml^I_r+ml^2I_g+m^2r^2l^2(1-\cos^2\phi_2)]>0
     \end{align*}
-    where $\vert\phi_1\vert<\pi/2$ and $\vert\phi_2\vert<\pi/2$, and hence $\bar\alpha b_1(X,t) + \bar\beta b_3(X,t) + \bar\iota b_5(X,t)>0$. Also, $\bar\alpha b_2(X,t) + \bar\beta b_4(X,t) + \bar\iota b_6(X,t)>0$ can be obtained with the same derivation.
+    where $\vert\phi_1\vert<\pi/2$ and $\vert\phi_2\vert<\pi/2$.
+    In addition, it is obvious that $b_5(X,t)>0$, and hence, for voiding the singularity of $\bar\alpha b_1(X,t) + \bar\beta b_3(X,t) + \bar\iota b_5(X,t)$,  the parameters should satisfy the condition $0<\bar\alpha\le\bar\beta$ and $\bar\iota>0$. $\bar\alpha b_2(X,t) + \bar\beta b_4(X,t) + \bar\iota b_6(X,t)>0$ can be obtained under the condition: $0<\bar\alpha\le\bar\iota$ and $\bar\beta>0$. Conclusively, $0<\bar\alpha\le\bar\iota$ and $0<\bar\alpha\le\bar\beta$ guarantee the non-singularity of the input in the MHSM control.
 \end{color}
 In preceding equation~(\ref{eq:u1u2})
 \begin{align}
@@ -681,10 +678,11 @@ Max torque actuation   &0.207 \textit{Nm}\\
 \noalign{\smallskip}\hline
 \end{tabular}
 \end{table}
-Referring to the experiment of SPHERES project, the simulation parameters describing the physical characteristics of the satellite are listed in Table~\ref{tab:1}. According to the parameter list, the input boundary is determined as $T_p = -T_n = 0.207Nm$. In particular the controller's output is programmed to satisfy the restriction of the actuator, which can avoid the block of the flywheels in some extent. The length of the tether is constant, since the variety of the length rate leads to an extremely complicated and unstable multi-satellite tethered systems. The reasonable length of the tether is essential, $l = 0.9m$, $\dot{l}=0m/s$, although the length will not take an important role in the following process of validating. In this simulation, it is assumed that the satellites expose itself to the real space environment, and there exist the solar radiation pressure torque and aerodynamic torque effecting its attitude stability. The values of the perturbation torques are approximate to $1\times 10^{-5}Nm$ on account of the researches on perturbation in space, and hence the external perturbation term can be expressed by a sinusoidal function whose amplitude equals to the boundary of perturbations~\cite{liu2013calculation}. Since the relative distance among the participating satellites is not large, without loss of generality, the form of preceding perturbation is identical.
+Referring to the experiment of SPHERES project, the simulation parameters describing the physical characteristics of the satellite are listed in Table~\ref{tab:1}. According to the parameter list, the input boundary is determined as $T_p = -T_n = 0.207Nm$. In particular the controller's output is programmed to satisfy the restriction of the actuator, which can avoid the block of the flywheels in some extent. The length of the tether is constant, since the variety of the length rate leads to an extremely complicated and unstable multi-satellite tethered systems. The reasonable length of the tether is essential, $l = 0.9m$, $\dot{l}=0m/s$, although the length will not take an important role in the following process of validating. In this simulation, it is assumed that the satellites expose itself to the real space environment, and there exist the solar radiation pressure torque and aerodynamic torque effecting its attitude stability. The values of the perturbation torques are approximate to $1\times 10^{-5}Nm$ on account of the researches on perturbation in space, and hence the external perturbation term can be expressed by a sinusoidal function whose amplitude equals to the boundary of perturbations~\cite{liu2013calculation}. \begin{color}{red}Without loss of generality, the perturbation term is thought to be a periodic function, and the period is $5000s$ approximately, which equals to the orbital period~\cite{inamori2015magnetic}. Hence for verifying the effectiveness of the MHSM control, the satellite is exerted by a sinusoidal perturbation whose amplitude is no more than $1\times 10^{-5}Nm$ with $2\times 10^{-4}Hz$. Since the relative distance among the participating satellites is not large, without loss of generality, the form of preceding perturbation is identical.
 \begin{align}
-d_i(X,t) \approx 1\times 10^{-5}\sin{(0.01\pi t)}\notag
+d_i(X,t) \approx 2\times 10^{-5}\sin(2\pi/5000)\notag
 \end{align}
+\end{color}
 \subsection{Individual System of Three-satellite Inline Array}
 In order to apply the MHSM scheme, which is proposed in Section~\ref{sec:SMC}, the parameters of the controller design is exhibited, $c_1 = 10$ and $c_2 = 3$, which meet the demand of Eq.~(\ref{eq:s1s2}), the parameters of second-level sliding surface in Eq.~(\ref{eq:S}), $\alpha=\beta=1$. The adaptive parameters can be decided as follows: $\delta = 1.8$, $\eta(0) = 1e^{-4}$, $\zeta = 1$ and $\gamma = 1\times 10^{-4}$. $\rho$ obtained due to the simulation process, which satisfies the conditions of Lyapunov stability.\par
 %figure5
