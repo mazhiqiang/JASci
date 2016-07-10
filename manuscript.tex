@@ -390,7 +390,7 @@ The uncertain dynamic system with nonlinearities indicated in Eq.~(\ref{eq:model
 $d_1(X,t)$ and $d_2(X,t)$ are the uncertain parts of system~(\ref{eq:model}), and satisfies the following relation $max(\vert d_1(X,t)\vert,\vert d_2(X,t)\vert) \le \zeta <\infty$, \begin{color}{red}where $\zeta$ is constant positive.\end{color}\label{as:2}
 \end{assumption}
 \begin{remark}
-The mathematical form of $d_i(X,t)$ is trigonometric term, and the detail of $d_i(X,t)$ will be given in Section~\ref{sec:sm}. Assumption~\ref{as:2} is reasonable since there exists the boundary of the perturbation mentioned above. In addition, it is obvious that the terms in the individual satellite system~(\ref{eq:3bodyreduce}) consist of the trigonometric and constant terms, and hence the extremes of $\vert c_1x_2+f_1(X,t)\vert$ and $\vert c_2x_4+f_2(X,t)\vert$ can be obtained by using mathematical calculation.
+The mathematical form of $d_i(X,t)$ is trigonometric term, and the detail of $d_i(X,t)$ will be given in Section~\ref{sec:sm}. Assumption~\ref{as:2} is reasonable since there exists the boundary of the perturbation mentioned above. In addition, it is obvious that the terms in the individual satellite system~(\ref{eq:3bodyreduce}) consist of the trigonometric and constant terms, and hence the extremes of $\vert c_1x_2+f_1(X,t)\vert$ and $\vert c_2x_4+f_2(X,t)\vert$ can be obtained by using mathematical calculation. In the regulation, the attitude angle is limited in a practical meaningful range $\vert x_3\vert<\pi/2$~\cite{chung2008propellant2}.
 \end{remark}\par
 Modified hierarchical sliding mode control (MHSM) constructs the first- and second-level surfaces like Eq.~(\ref{eq:s1s2}) and Eq.~(\ref{eq:S}), and thanks to the Lemma~\ref{lm:1} and Assumption~\ref{as:2}, we propose the adaptive control input as follows:
 \begin{align}
@@ -411,7 +411,7 @@ For voiding the singularity of the input~(\ref{eq:u}), the selection of $\alpha$
     =& \alpha(b_1(X,t)+b_2(X,t))+(\beta-\alpha)b_2(X,t)\\
     =&\frac{(\beta-\alpha)mrl\cos x_3 + \beta ml^2}{I_rml^2-m^2r^2l^2\cos{^2x_3}}>0.
     \end{align*}
-    This can guarantee the non-singularity of Eq.~(\ref{eq:u}), when $x_3$ is varying in a small region with $\vert x_3\vert<\pi/2$. For avoiding the singularity absolutely, one can select $\alpha = \beta >0$ to remove the effect of $x_3$.
+    This can guarantee the non-singularity of Eq.~(\ref{eq:u}), when $x_3$ is varying in a small region with $\vert x_3\vert<\pi/2$.
 \end{color}
 \begin{theorem}
 The nonlinear system which can be expressed as Eq.~(\ref{eq:model}), satisfies the Assumption~\ref{as:1} and~\ref{as:2}, and if the candidate of system input is Eq.~(\ref{eq:u}), the trajectories of the system asymptotically converge to the sliding surface $S = 0$.
@@ -605,15 +605,15 @@ u_2 &= -\frac{\bar\delta\bar\rho\eta_2(t)sgn(\bar S)+k_2\bar S}{\bar\alpha b_2(X
 \end{split}\label{eq:u1u2}
 \end{align}\par
 \begin{color}{red}
-For voiding the singularity of the input, the parameter $\bar\alpha$, $\bar\beta$ and $\bar\iota$ should satisfy the the condition $0<\bar\alpha\le\bar\iota$ and $0<\bar\alpha\le\bar\beta$ when $\vert\phi_1\vert<\pi/2$ and $\vert\phi_2\vert<\pi/2$.\par
+For voiding the singularity of the input, the parameter $\bar\alpha$, $\bar\beta$ and $\bar\iota$ should satisfy the the condition $0<\bar\alpha\le\bar\iota$ and $0<\bar\alpha\le\bar\beta$.\par
     Consider the expression $\bar\alpha b_1(X,t) + \bar\beta b_3(X,t)$ with $0<\bar\alpha\le \bar\beta$
     \begin{align*}
     &\bar\alpha b_1(X,t) + \bar\beta b_3(X,t)\\
     =&-\bar\alpha I_rmrl\cos\phi_1 + \bar\beta I_rmrl\cos\phi_1+\bar\beta[ml^I_r+ml^2I_g+m^2r^2l^2(1-\cos^2\phi_2)]\\
     =&(\bar\beta-\bar\alpha) I_rmrl\cos\phi_1+\bar\beta[ml^I_r+ml^2I_g+m^2r^2l^2(1-\cos^2\phi_2)]>0
     \end{align*}
-    when $\vert\phi_1\vert<\pi/2$ and $\vert\phi_2\vert<\pi/2$.
-    In addition, it is obvious that $b_5(X,t)>0$, and hence, for voiding the singularity of $\bar\alpha b_1(X,t) + \bar\beta b_3(X,t) + \bar\iota b_5(X,t)$,  the parameters should satisfy the condition $0<\bar\alpha\le\bar\beta$ and $\bar\iota>0$. $\bar\alpha b_2(X,t) + \bar\beta b_4(X,t) + \bar\iota b_6(X,t)>0$ can be obtained under the condition: $0<\bar\alpha\le\bar\iota$ and $\bar\beta>0$. Conclusively, when $\vert\phi_1\vert<\pi/2$ and $\vert\phi_2\vert<\pi/2$, $0<\bar\alpha\le\bar\iota$ and $0<\bar\alpha\le\bar\beta$ guarantee the non-singularity of the input in the MHSM control, and if one wants to obtain the non-singularity absolutely, $0<\bar\iota=\bar\alpha=\bar\beta$ is essential.
+    where $\vert\phi_1\vert<\pi/2$ and $\vert\phi_2\vert<\pi/2$.
+    In addition, it is obvious that $b_5(X,t)>0$, and hence, for voiding the singularity of $\bar\alpha b_1(X,t) + \bar\beta b_3(X,t) + \bar\iota b_5(X,t)$,  the parameters should satisfy the condition $0<\bar\alpha\le\bar\beta$ and $\bar\iota>0$. $\bar\alpha b_2(X,t) + \bar\beta b_4(X,t) + \bar\iota b_6(X,t)>0$ can be obtained under the condition: $0<\bar\alpha\le\bar\iota$ and $\bar\beta>0$. Conclusively, $0<\bar\alpha\le\bar\iota$ and $0<\bar\alpha\le\bar\beta$ guarantee the non-singularity of the input in the MHSM control.
 \end{color}
 In preceding equation~(\ref{eq:u1u2})
 \begin{align}
