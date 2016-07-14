@@ -117,7 +117,7 @@ In this paper, a novel adaptive sliding mode control scheme is proposed for the 
 \label{Figure:3satellite}
 \end{figure}
 %figure1
-\begin{color}{red} The structure of the three-satellite inline array stems from NASA's Submillimeter Probe of the Evolution of Cosmic Structure (SPECS) mission, which is famous as a tethered spacecraft interferometer, and the array keeps rotating while detecting submillimeter-wave-length light from the early universe~\cite{lorenzini2006far}. The structure of the three-satellite array can be seen in Figure~\ref{Figure:3satellite}. Compared with traditional two-body tethered satellite system, the two end bodies in the array can carry same instruments to observe the information to ensure accuracy of data. Also, due to the existence of the centripetal force, it is more convenient to deploy the tether while rotating the array in the deep space. In addition, some long-term spatial gravitational experiments can be developed based on this structure.\end{color}\par
+\begin{color}{red} The structure of the three-satellite inline array stems from NASA's Submillimeter Probe of the Evolution of Cosmic Structure (SPECS) mission, which is famous as a tethered spacecraft interferometer, and the array keeps rotating while detecting submillimeter-wave-length light from the early universe~\cite{lorenzini2006far}. The structure of the three-satellite array can be seen in Figure~\ref{Figure:3satellite}. Compared with traditional two-body tethered satellite system, the two end bodies in the array can carry same instruments to observe the information to ensure accuracy of data. Also, due to the specific rotating dynamics, it is more convenient to achieve the attitude regulation without the thruster firing and tension actuators. In addition, some long-term spatial gravitational experiments can be developed based on this structure.\end{color}\par
 The simplified Euler's rotational equations of the motion dynamics of the three-satellite inline array follows
 \begin{align}
 \begin{bmatrix}
@@ -148,12 +148,12 @@ J_1 &0  &0\\
 \end{align}
 where $J_1$ denotes the moment of inertia of the satellite array for the vertical axis; $J_1=3I_1+2ml^2$ in which $I_1$ refers to the moment of inertia of an individual participant in the three-body inline frame; $l$ identifies the tether length; $J_2$ has the similar expression $J_2=3I_2+2ml^2$ for the second axis. In Figure~\ref{Figure:3satellite}, the first axis is perpendicular to the rotation plane which is determined by the other two axes. Attach the third axis to the tether, and the rotation about the second axis generates the out-of-plane motion. Without loss of generality, it is quite reasonable to assume that the individual satellite is axis-symmetric thoroughly. The participating satellites arranging in a line neatly gives rise to $I_1=I_2$, and in addition the array is axis-symmetric about the third axis~\cite{chung2008propellant1}. Hence, Eq.~(\ref{eq:3body}) reduces to
 \begin{align}
-J_1\dot{\omega}_1-(J_1-J_3)\omega_3\omega_2=\tau_1\\
-J_2\dot{\omega}_2-(J_2-J_3)\omega_3\omega_1=\tau_2\\
+J_1\dot{\omega}_1-(J_1-J_3)\omega_3\omega_2=\tau_1\label{eq:3model1}\\
+J_2\dot{\omega}_2-(J_2-J_3)\omega_3\omega_1=\tau_2\label{eq:3model2}\\
 J_3\dot{\omega}_3=\tau_3\label{eq:3model}
 \end{align}
 \begin{color}{red}
-which brings out that the three-satellite inline tethered system torsional rotation dynamics is irrelevant to the other two axes~\cite{chung2008propellant1}. Since the dynamic state $\omega_3$ is independent from the two axes, a simple linear feedback control can be applied to control the dynamics of the third axis, such that both $\omega_3=0$ and $\dot\omega_3 = 0$. Hence Eq.~(\ref{eq:3model}) reduces to
+which brings out that the three-satellite inline tethered system torsional rotation dynamics is irrelevant to the other two axes~\cite{chung2008propellant1}. From Eq.~(\ref{eq:3model}) the dynamic state $\omega_3$ is independent from the two axes, and hence a linear feedback control can be applied to control the dynamics of the third axis, such that $\omega_3=0$ and $\dot\omega_3 = 0$. Hence Eqs.~(\ref{eq:3model1}) and~(\ref{eq:3model2}) reduce to
 \end{color}
 \begin{align}
 \begin{split}
@@ -284,7 +284,7 @@ M_1(\phi_i)
 \tau_{\phi i}
 \end{pmatrix}.\label{eq:3bodyreduce}
 \end{align}\par
-Figure~\ref{Figure:modelsinglebody} shows an individual participating satellite which rotates about the center of the array frame. \begin{color}{red}Body coordinate system $x$-$y$ requires that y axis points to the direction of the increase of the array rotation angle, and meanwhile $x$-axis is along the tether\end{color}. Assume that the tether is massless and inextensible so that the vibration dynamics can be regardless. The Kevlar physical property makes the tether strong and thin enough, i.e., SPECS owns the tether consisting of four tethers lines, and the total mass is approximate to 30 \textit{kg} for 1-km-long ribbon tether\cite{chung2007nonlinear1}. \begin{color}{red}The three-satellite inline tethered frame is assumed to rotate at a specific angular rate so that the tether keeps taut. In reality, the satellite will hit the tether when attitude angle $\phi_i$ crosses $\pi/2$ rad, and due to the rotation dynamics of the array and the small initial condition of $\phi_i$, we can assume that $\vert \phi\vert\le \pi/2$~\cite{chung2007nonlinear1}.\end{color}  Since the tether speed can be easily controlled by programmed tether motor and doesn't disturb any other system states, it's assumed that the tether length speed $\dot l$ is naught. Finally, assume the three-satellite inline tethered frame is manoeuvred to orbit in the second Lagrangian point of the earth-sun system referring to the SPECS project, and hence the gravity term is approximate to zero~\cite{lorenzini2006far}.\par
+Figure~\ref{Figure:modelsinglebody} shows an individual participating satellite which rotates about the center of the array frame. \begin{color}{red}Body coordinate system $x$-$y$ requires that y axis points to the direction of the increase of the array rotation angle, and meanwhile $x$-axis is along the tether\end{color}. Assume that the tether is massless and inextensible so that the vibration dynamics can be regardless. The Kevlar physical property makes the tether strong and thin enough, i.e., SPECS owns the tether consisting of four tethers lines, and the total mass is approximate to 30 \textit{kg} for 1-km-long ribbon tether\cite{chung2007nonlinear1}. \begin{color}{red}The three-satellite inline tethered frame is assumed to rotate at a specific angular rate so that the tether keeps taut and straight at all times. In reality, the satellite will hit the tether when attitude angle $\phi_i$ crosses $\pi/2$ rad, and due to the rotation dynamics of the array and the small initial condition of $\phi_i$, we can assume that $\vert \phi\vert\le \pi/2$~\cite{chung2007nonlinear1}.\end{color}  Since the tether speed can be easily controlled by programmed tether motor and doesn't disturb any other system states, it's assumed that the tether length speed $\dot l$ is naught. Finally, assume the three-satellite inline tethered frame is manoeuvred to orbit in the second Lagrangian point of the earth-sun system referring to the SPECS project, and hence the gravity term is approximate to zero~\cite{lorenzini2006far}.\par
 %figure2
 \begin{figure}
 \centering
@@ -474,17 +474,11 @@ M_3(\phi_1,\phi_2)
 \ddot{\phi}_1\\
 \ddot{\phi}_2
 \end{pmatrix}
-&+C_5(\phi_1,\phi_2,\dot{\theta},\dot{\phi}_1,\dot{\phi}_2)
++C_5(\phi_1,\phi_2,\dot{\theta},\dot{\phi}_1,\dot{\phi}_2)
 \begin{pmatrix}
 \dot{\theta}\\
 \dot{\phi}_1\\
 \dot{\phi}_2
-\end{pmatrix}\notag\\
-&+
-\begin{pmatrix}
-2m(r\cos\phi_1+r\cos\phi_2+2l)\dot\theta\dot l\\
-2mr\cos\phi_1\dot\theta\dot l\\
-2mr\cos\phi_2\dot\theta\dot l
 \end{pmatrix}
 =
 \begin{pmatrix}
